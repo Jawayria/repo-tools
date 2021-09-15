@@ -9,7 +9,6 @@ jobs:
 
   push:
     runs-on: ubuntu-20.04
-    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,10 +24,4 @@ jobs:
         run: pip install setuptools wheel
 
       - name: Build package
-        run: python setup.py sdist bdist_wheel
-
-      - name: Publish to PyPi
-        uses: pypa/gh-action-pypi-publish@master
-        with:
-          user: Jawayria
-          password: ${{ secrets.PYPI_UPLOAD_TOKEN }}
+        run: echo github.ref
