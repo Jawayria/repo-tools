@@ -24,4 +24,4 @@ jobs:
         run: pip install setuptools wheel
 
       - name: Build package
-        run: echo ${{ github.ref }}
+        run: echo ${{GITHUB_REF#refs/heads/}}
