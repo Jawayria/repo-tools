@@ -1,14 +1,15 @@
 name: Publish package to PyPi
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - '*'
 
 jobs:
 
   push:
     runs-on: ubuntu-20.04
-
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -29,5 +30,5 @@ jobs:
       - name: Publish to PyPi
         uses: pypa/gh-action-pypi-publish@master
         with:
-          user: __token__
+          user: Jawayria
           password: ${{ secrets.PYPI_UPLOAD_TOKEN }}
