@@ -13,9 +13,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Build package
+        run: echo ${{ github.ref }}
+
       - name: Exit if not on master branch
         if: endsWith(github.ref, 'master') == false
-        run: exit 0
+        run: exit 1
 
       - name: setup python
         uses: actions/setup-python@v2
@@ -28,5 +31,3 @@ jobs:
       - name: Install Dependencies
         run: pip install setuptools wheel
 
-      - name: Build package
-        run: echo ${GITHUB_REF##*/}
