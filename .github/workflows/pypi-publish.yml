@@ -17,17 +17,9 @@ jobs:
 
       - name: Build package
         run: |
-          git branch -a --contains tags/${GITHUB_REF##*/}
-          git checkout origin/master
-          git branch -a --contains tags/${GITHUB_REF##*/}
+          git branch -a --format='%(refname:short)' --contains ${GITHUB_REF##*/}
 
-
-      - name: print branch
-        run: |
-          echo ${GITHUB_REF##*/}
-
-      - name: Exit if not on master branch
-        if: endsWith(github.ref, 'master') == false
+      - name: Exit
         run: exit 1
 
       - name: setup python
@@ -41,3 +33,10 @@ jobs:
       - name: Install Dependencies
         run: pip install setuptools wheel
 
+      - name: Build package
+        run: python setup.py sdist bdist_wheel
+       - name: Publish to PyPi
+         uses: pypa/gh-action-pypi-publish@master
+         with:
+           user: Jawayria
+           password: ${{ secrets.PYPI_UPLOAD_TOKEN }}
