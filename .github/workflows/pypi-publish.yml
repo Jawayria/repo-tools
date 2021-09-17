@@ -24,6 +24,7 @@ jobs:
         run: |
           echo ${GITHUB_REF##*/}
           git branch
+          git branch --contains ${GITHUB_SHA}
           git branch --contains tags/${GITHUB_REF##*/}
 
       - name: Exit if not on master branch
