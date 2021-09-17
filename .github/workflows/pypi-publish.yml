@@ -15,8 +15,11 @@ jobs:
 
       - name: Build package
         run: |
-          git branch
           git checkout origin/master
+
+      - name: print branch
+        run: |
+          echo ${GITHUB_REF##*/}
           git branch --contains tags/${GITHUB_REF##*/}
 
       - name: Exit if not on master branch
