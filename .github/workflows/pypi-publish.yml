@@ -16,8 +16,7 @@ jobs:
           fetch-depth: 0
 
       - name: Build package
-        run: |
-          git branch -a
+        run: git branch -a
 
       - name: Exit
         run: exit 1
