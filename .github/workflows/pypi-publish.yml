@@ -17,15 +17,14 @@ jobs:
 
       - name: Build package
         run: |
+          git branch -a --contains tags/${GITHUB_REF##*/}
           git checkout origin/master
-          git branch -r
+          git branch -a --contains tags/${GITHUB_REF##*/}
+
 
       - name: print branch
         run: |
           echo ${GITHUB_REF##*/}
-          git branch -a
-          git branch -a --contains ${GITHUB_SHA}
-          git branch -a --contains tags/${GITHUB_REF##*/}
 
       - name: Exit if not on master branch
         if: endsWith(github.ref, 'master') == false
